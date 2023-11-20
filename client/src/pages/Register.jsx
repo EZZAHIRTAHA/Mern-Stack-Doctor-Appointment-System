@@ -19,10 +19,12 @@ const Register = () => {
     }
 
 
-
+   
     const handleSubmit = (event) => {
         event.preventDefault()
     }
+
+    
 
     console.log(formData);
 
@@ -35,7 +37,7 @@ const Register = () => {
             <div className="flex justify-center items-center">
               <img src={logo} alt="" className='w-12' />
             </div>
-            <h1 className='text-center text-2xl text-blue-500 mb-5'>Welcome back</h1>
+            <h1 className='text-center text-2xl text-logo mb-5'>Let's get you started </h1>
             
             <div className="relative z-0 w-full mb-6 group">
               <input

@@ -8,22 +8,23 @@ const Login = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
-    const handleSubmit = (event) => {
+    const handleSubmit = (event, values) => {
         event.preventDefault()
+        console.log(email, password);
     }
 
-    console.log(email + password);
 
     return (
         <section style={bgStyle} className='h-screen  w-full flex justify-center items-center'>
           <form
             className='bg-white bg-opacity-50 flex scale-up-center justify-center items-center flex-col gap-5 p-10 sm:p-30 rounded-[10px] shadow-2xl w-full md:w-[40%] h-[70%] '
             onSubmit={handleSubmit}
+            
           >
             <div className="flex justify-center items-center">
               <img src={logo} alt="" className='w-12' />
             </div>
-            <h1 className='text-center text-2xl text-blue-500 mb-5'>Welcome back</h1>
+            <h1 className='text-center text-2xl text-logo mb-5'>Welcome back !</h1>
             <div className="relative z-0 w-full mb-6 group">
               <input
                 type="email"
