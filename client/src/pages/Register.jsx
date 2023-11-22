@@ -13,20 +13,31 @@ const Register = () => {
     
     })
 
+    const clearForm = () => {
+      setFormData({
+        name: '',
+        email: '',
+        password: ''
+      })
+    
+    }
+
     const handleChange = (event) => {
       const { name, value } = event.target
       setFormData(formData => ({...formData, [name]: value}))
+      
     }
 
 
    
     const handleSubmit = (event) => {
         event.preventDefault()
+        console.log(formData);
+        clearForm()
     }
 
     
 
-    console.log(formData);
 
     return (
         <section style={bgStyle} className='h-screen w-full flex justify-center items-center'>

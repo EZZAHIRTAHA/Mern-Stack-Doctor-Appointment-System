@@ -2,15 +2,26 @@ import { useState, useEffect } from 'react'
 import { bgStyle, inputClasses, labelClasses, loginButton } from '../assets/classes';
 import { Link } from 'react-router-dom'
 import logo from '/images/logo.png'
+import { Outlet } from 'react-router-dom';
+
 const Login = () => {
 
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
-    const handleSubmit = (event, values) => {
+    const clearForm = () => {
+      setFormData({
+        name: '',
+        email: '',
+        password: ''
+      })
+    }
+
+    const handleSubmit = (event) => {
         event.preventDefault()
         console.log(email, password);
+        clearForm()
     }
 
 
@@ -65,6 +76,7 @@ const Login = () => {
               </Link>
             </div>
           </form>
+          <Outlet/>
         </section>
       );
       

@@ -1,5 +1,29 @@
 const User = require('../models/User');
 const asyncHandler = require('express-async-handler');
+const bcrypt = require('bcrypt')
+
+const loginUser = asyncHandler(async (req, res) => {
+    try {
+        const password = req.body.password;
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(password, salt);
+    } catch (error) {
+        
+    }
+});
+
+
+
+const registerUser = asyncHandler(async (req, res) => {
+
+});
+
+
+
+const logoutUser = asyncHandler(async (req, res) => {
+
+});
+
 
 
 const getData = asyncHandler(async (req, res) => {
@@ -17,7 +41,12 @@ const createUser = asyncHandler(async (req, res) => {
     }
 })
 
+
+
 module.exports = {
+    loginUser,
+    registerUser,
+    logoutUser,
     getData,
-    createUser
+    createUser,
 };

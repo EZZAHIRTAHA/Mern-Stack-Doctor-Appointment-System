@@ -7,7 +7,7 @@ const connectDb = require('./db/config');
 const router = require('./routes/UserRoutes');
 
 app.use(express.json());
-app.use('/api/users', router);
+app.use('/api/user', router);
 
 app.listen(PORT, () => {
     console.log('➜ Local:   '.bold + `http://localhost:${PORT}/`.cyan);
