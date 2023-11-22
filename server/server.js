@@ -5,6 +5,9 @@ require("dotenv").config();
 const colors = require('colors');
 const connectDb = require('./db/config');
 const router = require('./routes/UserRoutes');
+const cors = require('cors');
+
+app.use(cors());
 
 app.use(express.json());
 app.use('/api/user', router);
@@ -14,7 +17,7 @@ app.listen(PORT, () => {
 });
 
 app.get("/", (req, res) => {
-    res.send("<h2 style='text-align:center; color: cyan;'>Welcome to the server side!</h2>");
+    res.send("<h2 style='text-align:center;letter-spacing:2px; color: #1890ce; font-weight:4;'>Welcome to AKDITAL server!</h2>");
 });
 
 connectDb();
