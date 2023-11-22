@@ -2,7 +2,7 @@ const User = require('../models/User');
 const asyncHandler = require('express-async-handler');
 const bcrypt = require('bcryptjs')
 const colors = require('colors');
-
+const jwt = require('jsonwebtoken');
 
 const registerUser = asyncHandler(async (req, res) => {
     try {
@@ -28,9 +28,16 @@ const registerUser = asyncHandler(async (req, res) => {
 
 const loginUser = asyncHandler(async (req, res) => {
     try {
-        
+        const user = await User.findOne({email: req.body.email});
+        if(!user){
+            res.status(404).json({message: 'User Not Found', success: false});
+        }
+        const isMatch = await bcrypt.compare(req.body.password, user.password);
+        if(!isMatch){
+            res.status(400).json({message: 'Invalid Credentials', success: false});
+        }
     } catch (error) {
-        
+        res.status(500).json({message: error.message, success: false, });
     }
 });
 
