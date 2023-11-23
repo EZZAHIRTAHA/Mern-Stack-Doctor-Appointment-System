@@ -2,8 +2,14 @@ import { useState, useEffect } from 'react'
 import { bgStyle, inputClasses, labelClasses, loginButton } from '../assets/classes';
 import { Link } from 'react-router-dom'
 import logo from '/images/logo.png'
+import axios from 'axios'
+import toast from 'react-hot-toast'
+import { useNavigate } from 'react-router-dom';
+import { Hide, Show } from '../assets/icons';
+
 const Register = () => {
 
+    const baseUrl = 'http://localhost:5000/api/user/register' 
 
     const [formData, setFormData] = useState({
 
@@ -12,6 +18,16 @@ const Register = () => {
       password: ''
     
     })
+
+    const [showPassword, setShowPassword] = useState(false)
+
+    // console.log(showPassword);
+    
+    const togglePassword = () => {
+      setShowPassword(!showPassword)
+    }
+
+    const navigate = useNavigate()
 
     const clearForm = () => {
       setFormData({
@@ -29,12 +45,33 @@ const Register = () => {
     }
 
 
+
    
-    const handleSubmit = (event) => {
-        event.preventDefault()
-        console.log(formData);
-        clearForm()
+    const handleSubmit = async (event) => {
+      event.preventDefault()
+      try {
+        const response = await axios.post(baseUrl, formData)
+        if (response.data.success) {
+          toast.success(response.data.message)
+          clearForm()
+          navigate('/login')
+        } else {
+          toast.error(response.data.message)
+        }
+      } catch (error) {
+        if (error.response && error.response.status === 400) {
+          // If the server responds with status code 400, it means the user already exists
+          toast.error(error.response.data.message)
+        } else {
+          // Handle other errors
+          console.error("Error in handleSubmit:", error);
+          toast.error("Something went wrong")
+        }
+      }
     }
+    
+
+    
 
     
 
@@ -81,21 +118,24 @@ const Register = () => {
                 Email address
               </label>
             </div>
-            <div className="relative z-0 w-full mb-6 group">
-              <input
-                type="password"
-                name="password"
-                id="floating_password"
-                className={`${inputClasses}`}
-                placeholder=" "
-                onChange={handleChange}
-                value={formData.password}
-                required
-              />
-              <label htmlFor="floating_password" className={`${labelClasses}`}>
-                Password
-              </label>
-            </div>
+              <div className="relative z-0 w-full mb-6 group flex items-center">
+                <input
+                  type={`${showPassword ? 'text' : 'password'}`}
+                  name="password"
+                  id="floating_password"
+                  className={`${inputClasses} flex-grow`}
+                  placeholder=" "
+                  onChange={handleChange}
+                  value={formData.password}
+                  required
+                />
+                {formData.password && <div onClick={togglePassword} className="flex items-center justify-center cursor-pointer">
+                  { showPassword ? <Hide className='text-2xl text-logo' /> : <Show className='text-2xl text-logo' /> }
+                </div>}
+                <label htmlFor="floating_password" className={`${labelClasses}`}>
+                  Password
+                </label>
+              </div>
             <button type="submit" className={`${loginButton}`}>
               Register
             </button>

@@ -1,27 +1,40 @@
 import { useState, useEffect } from 'react'
 import { bgStyle, inputClasses, labelClasses, loginButton } from '../assets/classes';
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import logo from '/images/logo.png'
-import { Outlet } from 'react-router-dom';
+import axios from 'axios';
+import toast from 'react-hot-toast';
 
 const Login = () => {
+
 
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
-    const clearForm = () => {
-      setFormData({
-        name: '',
-        email: '',
-        password: ''
-      })
-    }
+    const navigate = useNavigate()
 
-    const handleSubmit = (event) => {
+    
+
+    const baseUrl = 'http://localhost:5000/api/user/login' 
+
+    const handleSubmit = async (event) => {
         event.preventDefault()
-        console.log(email, password);
-        clearForm()
+        try {
+          const response = await axios.post(baseUrl, email, password)
+          if(response.data.success) {
+            toast.success(response.data.message)
+            localStorage.setItem('token', response.data.token);
+            navigate('/')
+          }
+          else {
+            toast.error(response.data.message)
+          }
+
+        } catch (error) {
+          toast.error("Something went wrong")
+          console.log(error);
+        }
     }
 
 
@@ -76,7 +89,6 @@ const Login = () => {
               </Link>
             </div>
           </form>
-          <Outlet/>
         </section>
       );
       
