@@ -46,12 +46,12 @@ const loginUser = asyncHandler(async (req, res) => {
 
     if (!isMatch) {
       return res
-        .status(200)
+        .status(401)
         .json({ message: 'Invalid Credentials', success: false });
     }
 
     // If the user and password are correct, generate a token
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1d' });
 
     // You can also send additional user information if needed
     res.status(200).json({
@@ -66,11 +66,12 @@ const loginUser = asyncHandler(async (req, res) => {
       },
     });
   } catch (error) {
+    console.log(error);
     res.status(500).json({ message: error.message, success: false });
   }
 });
 
-module.exports = loginUser;
+
 
 
 

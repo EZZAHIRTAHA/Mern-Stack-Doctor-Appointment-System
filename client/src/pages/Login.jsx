@@ -4,6 +4,8 @@ import { Link, useNavigate } from 'react-router-dom'
 import logo from '/images/logo.png'
 import axios from 'axios';
 import toast from 'react-hot-toast';
+import { Hide, Show } from '../assets/icons';
+
 
 const Login = () => {
 
@@ -11,6 +13,7 @@ const Login = () => {
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [showPassword, setShowPassword] = useState(false)
 
     const navigate = useNavigate()
 
@@ -19,22 +22,33 @@ const Login = () => {
     const baseUrl = 'http://localhost:5000/api/user/login' 
 
     const handleSubmit = async (event) => {
-        event.preventDefault()
-        try {
-          const response = await axios.post(baseUrl, email, password)
-          if(response.data.success) {
-            toast.success(response.data.message)
-            localStorage.setItem('token', response.data.token);
-            navigate('/')
-          }
-          else {
-            toast.error(response.data.message)
-          }
-
-        } catch (error) {
-          toast.error("Something went wrong")
-          console.log(error);
+      event.preventDefault();
+      try {
+        const response = await axios.post(baseUrl, { email, password });
+        if (response.data.success) {
+          toast.success(response.data.message);
+          localStorage.setItem('token', response.data.token);
+          navigate('/');
+        } else {
+          toast.error(response.data.message);
         }
+      } catch (error) {
+        if (error.response && error.response.status === 404) {
+          // If the server responds with status code 400, it means the user already exists
+          toast.error(error.response.data.message)
+        } else if(error.response && error.response.status === 401) {
+          toast.error(error.response.data.message)
+        }
+        else{
+          console.error("Error in handleSubmit:", error);
+          toast.error("Something went wrong")
+        }
+      }
+    };
+    
+
+    const togglePassword = () => {
+      setShowPassword(!showPassword)
     }
 
 
@@ -64,21 +78,24 @@ const Login = () => {
                 Email address
               </label>
             </div>
-            <div className="relative z-0 w-full mb-6 group">
-              <input
-                type="password"
-                name="floating_password"
-                id="floating_password"
-                className={`${inputClasses}`}
-                placeholder=" "
-                onChange={(e) => setPassword(e.target.value)}
-                value={password}
-                required
-              />
-              <label htmlFor="floating_password" className={`${labelClasses}`}>
-                Password
-              </label>
-            </div>
+            <div className="relative z-0 w-full mb-6 group flex items-center">
+                <input
+                  type={`${showPassword ? 'text' : 'password'}`}
+                  name="password"
+                  id="floating_password"
+                  className={`${inputClasses} flex-grow`}
+                  placeholder=" "
+                  onChange={(e) => setPassword(e.target.value)}
+                  value={password}
+                  required
+                />
+                {password && <div onClick={togglePassword} className="flex items-center justify-center cursor-pointer">
+                  { showPassword ? <Hide className='text-2xl text-logo' /> : <Show className='text-2xl text-logo' /> }
+                </div>}
+                <label htmlFor="floating_password" className={`${labelClasses}`}>
+                  Password
+                </label>
+              </div>
             <button type="submit" className={`${loginButton}`}>
               Login
             </button>

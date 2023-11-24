@@ -1,6 +1,6 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
-import { Login, Register } from './pages'
+import { Home, Login, Register } from './pages'
 import { Toaster } from 'react-hot-toast'
 
 const App = () => {
@@ -12,7 +12,7 @@ const App = () => {
         duration={4000}
       />
       <Routes>
-        <Route path='/' /> 
+        <Route path='/' element={<Home/>}/> 
         <Route path='/login' element={<Login/>} />
         <Route path='/register' element={<Register/>} />
       </Routes>

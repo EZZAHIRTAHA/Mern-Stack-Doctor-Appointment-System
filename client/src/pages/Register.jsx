@@ -53,7 +53,6 @@ const Register = () => {
         const response = await axios.post(baseUrl, formData)
         if (response.data.success) {
           toast.success(response.data.message)
-          clearForm()
           navigate('/login')
         } else {
           toast.error(response.data.message)
