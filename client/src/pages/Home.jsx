@@ -1,19 +1,15 @@
 import {} from 'react'
 import toast from 'react-hot-toast';
+import { Link } from 'react-router-dom';
 
 const Home = () => {
     
-    const handleLogout = () => {
-        localStorage.removeItem('token');
-        window.location.reload();
-        toast.success('Logged out successfully');
-    }
+
 
   return (
-    <div className='h-screen flex justify-center items-center  text-indigo-500'>
-      <button className='border border-indigo-500 p-2 rounded' onClick={handleLogout}>
-        Logout 
-      </button>
+    <div className='h-screen flex justify-start w-[20%]  bg-indigo-950  text-indigo-500'>
+      <div className="flex justify-start gap-5 text-center  flex-col">
+      </div>
     </div>
   )
 }
