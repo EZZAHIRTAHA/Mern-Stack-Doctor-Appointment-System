@@ -21,4 +21,3 @@ app.get("/", (req, res) => {
 });
 
 connectDb();
-

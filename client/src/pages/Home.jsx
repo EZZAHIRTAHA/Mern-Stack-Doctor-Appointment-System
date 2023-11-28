@@ -1,60 +1,43 @@
-import { Sidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
-import { Link } from 'react-router-dom'; 
-import {
-  DashboardIcon, ShoppingCartIcon, CalculatorIcon, PieChartIcon, MedicalFolder, Pharmacie
-} from '../assets/icons';
-import { BiUser } from 'react-icons/bi';
+import React, { useState } from 'react';
+import { Link, NavLink } from 'react-router-dom';
+import { menuItem } from '../assets/menuItem';
+import { FaBars } from 'react-icons/fa';
+import logo from '/images/logo.png'
 
-const Dashboard = () => {
-  const menuItem = [
-    {
-      path: "/",
-      name: "Dashboard",
-      icon: <DashboardIcon />,
-    },
-    {
-      path: "/users",
-      name: "Users",
-      icon: <BiUser />,
-    },
-    {
-      path: "/comptabilite",
-      name: "Comptabilité",
-      icon: <CalculatorIcon />,
-    },
-    {
-      path: "/statistiques",
-      name: "Statistiques",
-      icon: <PieChartIcon />,
-    },
-    {
-      path: "/dossiers_patient",
-      name: "Dossiers patient",
-      icon: <MedicalFolder />,
-    },
-    {
-      path: "/pharmacie",
-      name: "Pharmacie",
-      icon: <Pharmacie />,
-    },
-  ];
 
+
+const Home = () => {
+
+
+  const[isOpen ,setIsOpen] = useState(false);
+    
+  const toggle = () => setIsOpen (!isOpen);
+  
   return (
-    <Sidebar className=' flex h-screen w-full m-10 bg-gray-800 text-white justify-center items-center'>
-      <Menu className='flex p-4 rounded-xl bg-gray-800 w-full  justify-center items-center'>
-        {menuItem.map((item, index) => (
-          <Link to={item.path} className='flex text-xl w-full justify-center items-center' key={index}>
-              <span>
-                {item.icon}
-                </span>
-            <MenuItem className='w-full'>
-              {item.name}
-              </MenuItem>
-          </Link>
-        ))}
-      </Menu>
-    </Sidebar>
-  );
-}
+    <div className="container text-sm ">
+       <div style={{width: isOpen ? "300px" : "50px"}} className="sidebar ">
+           <div className="top_section">
+            <Link to={'/'}>
+               <img  className={`${!isOpen && 'hidden'} icon`} src={logo}/>
+            </Link>
+               <div style={{marginLeft: isOpen ? "50px" : "0px"}} className="bars">
+                   <FaBars onClick={toggle}/>
+               </div>
+           </div>
+           {
+               menuItem.map((item, index)=>(
+                   <NavLink to={item.path} key={index} className="link  rounded-none w-full" activeclassname="active">
+                       <div className="icon flex items-center">{item.icon}</div>
+                       <div style={{display: isOpen ? "block" : "none"}} className="link_text">{item.name}</div>
+                       <div className="">
+                       </div>
+                   </NavLink>
+               ))
+           }
+       </div>
+       
+    </div>
+);
+} 
 
-export default Dashboard;
+export default Home
