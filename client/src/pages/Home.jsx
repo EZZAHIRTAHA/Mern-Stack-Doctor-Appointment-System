@@ -4,6 +4,7 @@ import { menuItem } from '../assets/menuItem';
 import { FaBars } from 'react-icons/fa';
 import logo from '/images/logo.png';
 import axios from 'axios';
+import Navbar from './Navbar';
 
 
 const Home = () => {
@@ -35,6 +36,8 @@ const Home = () => {
   }, []);
   
   return (
+    <>
+    <Navbar/>
     <div className="container text-sm ">
        <div style={{width: isOpen ? "300px" : "50px"}} className="sidebar ">
            <div className="top_section">
@@ -58,6 +61,7 @@ const Home = () => {
        </div>
        
     </div>
+    </>
 );
 } 
 
