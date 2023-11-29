@@ -4,6 +4,7 @@ const bcrypt = require('bcryptjs')
 const colors = require('colors');
 const jwt = require('jsonwebtoken');
 
+
 const registerUser = asyncHandler(async (req, res) => {
     try {
         const userExist = await User.findOne({email: req.body.email});
@@ -72,8 +73,29 @@ const loginUser = asyncHandler(async (req, res) => {
 });
 
 
+const getUserInfoById = asyncHandler(async (req, res) => {
+  try {
+    const user = await User.findOne({ _id: req.body.userId});
+    if(!user) {
+      res.status(404).json({ message: 'User Not Found', success: false });
+    }else {
+      res.status(200).json({
+        // message: 'User Found',
+        success: true,
+        user: {
+          _id: user._id,
+          username: user.name,
+          email: user.email,
+          // Add any other user information you want to include
+        },
+      });
+    }
+  } catch (error) {  
+    res.status(500).json({ message: error.message, success: false });
+  }
+})
 
-
+ 
 
 
 const logoutUser = asyncHandler(async (req, res) => {
@@ -105,4 +127,5 @@ module.exports = {
     logoutUser,
     getData,
     createUser,
+    getUserInfoById
 };

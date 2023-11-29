@@ -1,17 +1,38 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { menuItem } from '../assets/menuItem';
 import { FaBars } from 'react-icons/fa';
-import logo from '/images/logo.png'
-
+import logo from '/images/logo.png';
+import axios from 'axios';
 
 
 const Home = () => {
 
 
+  const baseUrl = "http://localhost:5000/api/user/get-user-info-by-id"
+
+
   const[isOpen ,setIsOpen] = useState(false);
     
   const toggle = () => setIsOpen (!isOpen);
+
+
+  const getData = async() => {
+    try {
+      const res = await axios.post(baseUrl, {},  {
+        headers : {
+          Authorization: `Bearer ${localStorage.getItem('token')}`
+        }
+      })
+      console.log(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(()=> {
+    getData()
+  }, []);
   
   return (
     <div className="container text-sm ">
