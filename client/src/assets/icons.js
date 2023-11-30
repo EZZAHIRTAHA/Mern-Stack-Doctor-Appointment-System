@@ -1,5 +1,5 @@
 import { FaRegUser } from "react-icons/fa";
-import { BiShow, BiHide } from "react-icons/bi";
+import { BiShow, BiHide,  } from "react-icons/bi";
 import { AiOutlineShoppingCart, AiOutlineMenu } from 'react-icons/ai';
 import { BsCalculatorFill, BsFillPieChartFill } from 'react-icons/bs';
 import { FaHandHoldingMedical, FaBookMedical, FaClinicMedical } from 'react-icons/fa';
