@@ -31,6 +31,7 @@ const Home = () => {
     }
   }
 
+
   useEffect(()=> {
     getData()
   }, []);
