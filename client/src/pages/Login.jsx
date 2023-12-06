@@ -5,26 +5,31 @@ import logo from '/images/logo.png'
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import { Hide, Show } from '../assets/icons';
+import { useDispatch, useSelector } from 'react-redux';
+import { showLoading, hideLoading } from '../redux/reducers/alertsSlice';
 
 
 const Login = () => {
 
 
 
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const [showPassword, setShowPassword] = useState(false)
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
 
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const loading = useSelector(state => state.alerts.loading);
+    const dispatch = useDispatch();
 
-    
 
-    const baseUrl = 'http://localhost:5000/api/user/login' 
+    const baseUrl = 'http://localhost:5000/api/user/login';
 
     const handleSubmit = async (event) => {
       event.preventDefault();
       try {
+        dispatch(showLoading());
         const response = await axios.post(baseUrl, { email, password });
+        dispatch(hideLoading());
         if (response.data.success) {
           toast.success(response.data.message);
           localStorage.setItem('token', response.data.token);
@@ -35,11 +40,12 @@ const Login = () => {
       } catch (error) {
         if (error.response && error.response.status === 404) {
           // If the server responds with status code 400, it means the user already exists
-          toast.error(error.response.data.message)
+          toast.error(error.response.data.message);
         } else if(error.response && error.response.status === 401) {
-          toast.error(error.response.data.message)
+          toast.error(error.response.data.message);
         }
         else{
+          dispatch(hideLoading);
           console.error("Error in handleSubmit:", error);
           toast.error("Something went wrong")
         }
@@ -49,7 +55,7 @@ const Login = () => {
 
     const togglePassword = () => {
       setShowPassword(!showPassword)
-    }
+    };
 
 
 
@@ -57,9 +63,8 @@ const Login = () => {
     return (
         <section style={bgStyle} className='h-screen  w-full flex justify-center items-center'>
           <form
-            className='bg-white bg-opacity-50 flex scale-up-center justify-center items-center flex-col gap-5 p-10 sm:p-30 rounded-[10px] shadow-2xl w-full md:w-[40%] h-[70%] '
+            className='bg-white bg-opacity-50 flex scale-up-center justify-center items-center flex-col gap-5 p-10 sm:p-30 rounded-[10px] shadow-2xl w-full md:w-[40%] md:h-[90%] h-full '
             onSubmit={handleSubmit}
-            
           >
             <div className="flex justify-center items-center">
               <img src={logo} alt="" className='w-12' />
