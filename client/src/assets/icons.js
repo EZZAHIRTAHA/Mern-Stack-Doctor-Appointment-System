@@ -6,6 +6,7 @@ import { FaHandHoldingMedical, FaBookMedical, FaClinicMedical } from 'react-icon
 import {FaHospitalUser} from 'react-icons/fa6';
 import {GrClose} from 'react-icons/gr';
 import { RxDashboard } from 'react-icons/rx';
+import { ImSpinner2 } from "react-icons/im";
 
 
 
@@ -23,3 +24,4 @@ export const Admission = FaHospitalUser;
 export const MenuBar = AiOutlineMenu;
 export const Close = GrClose;
 export const DashboardIcon = RxDashboard;
+export const Spinner = ImSpinner2;

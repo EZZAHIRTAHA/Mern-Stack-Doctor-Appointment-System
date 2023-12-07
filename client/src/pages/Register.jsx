@@ -7,7 +7,7 @@ import toast from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom';
 import { Hide, Show } from '../assets/icons';
 import { useDispatch, useSelector } from 'react-redux';
-import { showLoading } from '../redux/reducers/alertsSlice';
+import { hideLoading, showLoading } from '../redux/reducers/alertsSlice';
 
 const Register = () => {
 
@@ -57,6 +57,7 @@ const Register = () => {
       try {
         dispatch(showLoading())
         const response = await axios.post(baseUrl, formData)
+        dispatch(hideLoading())
         if (response.data.success) {
           toast.success(response.data.message)
           navigate('/login')
@@ -70,6 +71,7 @@ const Register = () => {
         } else {
           // Handle other errors
           console.error("Error in handleSubmit:", error);
+          dispatch(hideLoading())
           toast.error("Something went wrong")
         }
       }
