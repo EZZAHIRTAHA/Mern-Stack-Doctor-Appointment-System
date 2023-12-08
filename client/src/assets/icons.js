@@ -8,6 +8,7 @@ import {GrClose} from 'react-icons/gr';
 import { RxDashboard } from 'react-icons/rx';
 import { ImSpinner2 } from "react-icons/im";
 
+import { CiLogout } from "react-icons/ci";
 
 
 
@@ -25,3 +26,4 @@ export const MenuBar = AiOutlineMenu;
 export const Close = GrClose;
 export const DashboardIcon = RxDashboard;
 export const Spinner = ImSpinner2;
+export const Logout = CiLogout;

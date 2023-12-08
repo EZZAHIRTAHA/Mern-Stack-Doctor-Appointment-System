@@ -1,19 +1,52 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import akdital from '/images/akdital.png'
 import toast from 'react-hot-toast'
-import { Close, MenuBar } from '../assets/icons'
+import { Close, Logout, MenuBar } from '../assets/icons'
+import axios from 'axios'
 
 
 
 const Navbar = () => {
 
     const [navbarOpen, setNavbarOpen] = useState(false)
+    const [user, setUser] = useState(null)
 
     const handleToggle = () => {
       setNavbarOpen(!navbarOpen)
     }
 
+    const baseUrl = 'http://localhost:5000/api/user/get-user-info-by-id'
 
+    useEffect(() => {
+      const fetchUserData = async () => {
+        try {
+          const token = localStorage.getItem('token');
+          if (token) {
+            const response = await axios.get(baseUrl, {
+              method: 'GET',
+              headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`,
+              },
+            });
+  
+            if (response.ok) {
+              const userData = await response.json();
+              setUser(userData.user);
+            } else {
+              // Handle error cases (e.g., token expired, server error)
+              console.error('Error fetching user data:', response.status);
+            }
+          }
+        } catch (error) {
+          console.error('Error fetching user data:', error);
+        }
+      };
+  
+      fetchUserData();
+    }, []);
+    console.log(user)
+  
     const handleLogout = () => {
         localStorage.removeItem('token')
         toast.success('Logout successful')
@@ -41,7 +74,7 @@ const Navbar = () => {
                     className="block py-2 px-3 text-white rounded hover:bg-gray-700 focus:outline-none focus:ring focus:border-blue-300 transition duration-300"
                     aria-current="page"
                   >
-                    Logout
+                    Logout <Logout className='text-2xl '/>
                   </button>
                 </li>
               </ul>
@@ -49,8 +82,14 @@ const Navbar = () => {
           )}
     <div className="hidden w-full md:block md:w-auto" id="navbar-default">
       <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+        <li className='text-white'>
+          Welcome Taha
+        </li>
         <li>
-          <button onClick={handleLogout} className="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500" aria-current="page">Logout</button>
+          <button onClick={handleLogout} className="flex justify-center items-center gap-3 py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent  md:p-0 border-1 border-white " aria-current="page">
+            <Logout className='text-2xl'/>
+            Logout
+          </button>
         </li>
       </ul>
     </div>

@@ -1,22 +1,23 @@
-import { FaCommentAlt, FaRegChartBar, FaShoppingBag, FaThList, FaUserAlt, FaUsers } from "react-icons/fa";
+import { FaCommentAlt, FaRegChartBar, FaBusinessTime , FaClinicMedical } from "react-icons/fa";
+import { CiHome } from "react-icons/ci";
 
 export const menuItem=[
     {
         path:"/",
-        name:"Users",
-        icon:<FaUsers/>,
+        name:"Home",
+        icon:<CiHome/>,
         submenus: 
             { title: "Submenu1", link: '/Dashboard/test' }
     },
     {
-        path:"/about",
-        name:"About",
-        icon:<FaUserAlt/>
+        path:"/appointements",
+        name:"Appointements",
+        icon:<FaBusinessTime/>
     },
     {
-        path:"/analytics",
-        name:"Analytics",
-        icon:<FaRegChartBar/>
+        path:"/apply-doctor",
+        name:"Apply Doctor",
+        icon:<FaClinicMedical />
     },
     // {
     //     path:"/comment",
