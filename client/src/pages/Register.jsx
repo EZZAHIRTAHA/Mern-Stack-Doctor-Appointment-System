@@ -53,29 +53,31 @@ const Register = () => {
 
    
     const handleSubmit = async (event) => {
-      event.preventDefault()
+      event.preventDefault();
       try {
-        dispatch(showLoading())
-        const response = await axios.post(baseUrl, formData)
-        dispatch(hideLoading())
+        dispatch(showLoading());
+        const response = await axios.post(baseUrl, formData);
         if (response.data.success) {
-          toast.success(response.data.message)
-          navigate('/login')
+          toast.success(response.data.message);
+          navigate('/login');
         } else {
-          toast.error(response.data.message)
+          toast.error(response.data.message);
         }
       } catch (error) {
         if (error.response && error.response.status === 400) {
           // If the server responds with status code 400, it means the user already exists
-          toast.error(error.response.data.message)
+          toast.error(error.response.data.message);
         } else {
           // Handle other errors
           console.error("Error in handleSubmit:", error);
-          dispatch(hideLoading())
-          toast.error("Something went wrong")
+          toast.error("Something went wrong");
         }
+      } finally {
+        // Make sure to hide the loading spinner regardless of the outcome
+        dispatch(hideLoading());
       }
-    }
+    };
+    
     
 
     

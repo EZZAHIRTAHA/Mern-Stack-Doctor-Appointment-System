@@ -29,7 +29,6 @@ const Login = () => {
       try {
         dispatch(showLoading());
         const response = await axios.post(baseUrl, { email, password });
-        dispatch(hideLoading());
         if (response.data.success) {
           toast.success(response.data.message);
           localStorage.setItem('token', response.data.token);
@@ -39,18 +38,20 @@ const Login = () => {
         }
       } catch (error) {
         if (error.response && error.response.status === 404) {
-          // If the server responds with status code 400, it means the user already exists
+          // If the server responds with status code 404, it means the user not found
           toast.error(error.response.data.message);
-        } else if(error.response && error.response.status === 401) {
+        } else if (error.response && error.response.status === 401) {
           toast.error(error.response.data.message);
-        }
-        else{
-          dispatch(hideLoading);
+        } else {
           console.error("Error in handleSubmit:", error);
-          toast.error("Something went wrong")
+          toast.error("Something went wrong");
         }
+      } finally {
+        // Ensure that the loading spinner is hidden regardless of success or error
+        dispatch(hideLoading());
       }
     };
+    
     
 
     const togglePassword = () => {

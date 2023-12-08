@@ -4,6 +4,8 @@ import { Home, Login, Register } from './pages'
 import { Toaster } from 'react-hot-toast'
 import { Spinner } from './assets/icons'
 import { useSelector } from 'react-redux'
+import ProtectedRoute from './components/ProtectedRoute'
+import PublicRoute from './components/PublicRoute'
 
 const App = () => {
 
@@ -11,7 +13,7 @@ const App = () => {
 
   return (
     <>
-    { <div className="h-[100%] w-[100%] fixed top-0 left-0 z-[9999] flex justify-center items-center bg-[#000] opacity-25">
+    {loading && <div className="h-[100%] w-[100%] fixed top-0 left-0 z-[9999] flex justify-center items-center bg-[#000] opacity-25">
       <Spinner
         className='text-4xl  text-gray-200 animate-spin dark:text-gray-600 fill-blue-600'
       />
@@ -23,9 +25,32 @@ const App = () => {
       />
       <Routes>
         
-        <Route path='/' element={<Home/>}/> 
-        <Route path='/login' element={<Login/>} />
-        <Route path='/register' element={<Register/>} />
+        <Route 
+          path='/' 
+          element={
+          <ProtectedRoute>
+            <Home/>
+          </ProtectedRoute>
+        }
+
+        />
+          <Route 
+            path='/login' 
+            element={
+            <PublicRoute>
+              <Login/>
+            </PublicRoute>
+          } 
+          />
+
+          <Route 
+            path='/register' 
+            element={
+            <PublicRoute>
+              <Register/>
+              </PublicRoute>
+            } 
+          />
         
       </Routes>
     </>
