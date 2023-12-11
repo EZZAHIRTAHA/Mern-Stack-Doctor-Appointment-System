@@ -12,6 +12,7 @@ const Home = () => {
 
   const baseUrl = "http://localhost:5000/api/user/get-user-info-by-id"
 
+  const [user, setUser] = useState('')
 
   const[isOpen ,setIsOpen] = useState(false);
     
@@ -26,6 +27,7 @@ const Home = () => {
         }
       })
       console.log(res.data);
+      setUser(res.data.user.username)
     } catch (error) {
       console.log(error);
     }
@@ -38,7 +40,7 @@ const Home = () => {
   
   return (
     <>
-    <Navbar/>
+    <Navbar user={user}/>
     <div className="container text-sm ">
        <div style={{width: isOpen ? "300px" : "50px"}} className="sidebar ">
            <div className="top_section">

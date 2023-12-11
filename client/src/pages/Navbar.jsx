@@ -1,15 +1,21 @@
 import { useEffect, useState } from 'react'
 import akdital from '/images/akdital.png'
 import toast from 'react-hot-toast'
-import { Close, Logout, MenuBar } from '../assets/icons'
+import { Close, Logout, MenuBar, User } from '../assets/icons'
 import axios from 'axios'
 import { logoutButton } from '../assets/classes'
 
 
 
-const Navbar = () => {
+const Navbar = ({user}) => {
 
     const [navbarOpen, setNavbarOpen] = useState(false)
+
+
+
+
+
+
 
     const handleToggle = () => {
       setNavbarOpen(!navbarOpen)
@@ -51,8 +57,11 @@ const Navbar = () => {
           )}
     <div className="hidden w-full md:block md:w-auto" >
       <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
-        <li className='text-white'>
-          Welcome Taha
+        <li className='text-white flex justify-center items-center gap-3 '>
+          <User className='text-xl'/> Welcome 
+          <span className='text-logo uppercase'>
+            {user}
+          </span>
         </li>
         <li>
           <button onClick={handleLogout} className={logoutButton} aria-current="page">
