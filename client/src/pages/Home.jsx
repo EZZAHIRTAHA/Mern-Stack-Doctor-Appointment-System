@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, Route, Routes } from 'react-router-dom';
 import { menuItem } from '../assets/menuItem';
 import { FaBars } from 'react-icons/fa';
 import logo from '/images/logo.png';
 import axios from 'axios';
 import Navbar from './Navbar';
+import MakeAppointment from './MakeAppointment';
+import ApplyDoctor from './ApplyDoctor';
 
 
 const Home = () => {
@@ -62,7 +64,10 @@ const Home = () => {
                ))
            }
        </div>
-       
+       <Routes>
+          <Route path='/appointements' element={<MakeAppointment />} />
+          <Route path='/apply-doctor' element={<ApplyDoctor />} />
+        </Routes>
     </div>
     </>
 );

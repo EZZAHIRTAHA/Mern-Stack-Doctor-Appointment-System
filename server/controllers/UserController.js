@@ -4,7 +4,7 @@ const bcrypt = require('bcryptjs')
 const colors = require('colors');
 const jwt = require('jsonwebtoken');
 
-
+ 
 const registerUser = asyncHandler(async (req, res) => {
     try {
         const userExist = await User.findOne({email: req.body.email});
@@ -24,8 +24,6 @@ const registerUser = asyncHandler(async (req, res) => {
         res.status(500).json({message: error.message, success: false, });
     }
 });
-
-
 
 
 
@@ -117,6 +115,7 @@ const createUser = asyncHandler(async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 })
+
 
 
 

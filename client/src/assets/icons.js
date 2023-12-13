@@ -2,7 +2,7 @@ import { FaRegUser } from "react-icons/fa";
 import { BiShow, BiHide,  } from "react-icons/bi";
 import { AiOutlineShoppingCart, AiOutlineMenu } from 'react-icons/ai';
 import { BsCalculatorFill, BsFillPieChartFill } from 'react-icons/bs';
-import { FaHandHoldingMedical, FaBookMedical, FaClinicMedical } from 'react-icons/fa';
+import { FaHandHoldingMedical, FaBookMedical, FaClinicMedical, FaPowerOff } from 'react-icons/fa';
 import {FaHospitalUser} from 'react-icons/fa6';
 import {GrClose} from 'react-icons/gr';
 import { RxDashboard } from 'react-icons/rx';
@@ -10,6 +10,7 @@ import { ImSpinner2 } from "react-icons/im";
 
 import { CiLogout,   } from "react-icons/ci";
 
+import { IoIosNotificationsOutline } from "react-icons/io";
 
 
 export const User = FaRegUser 
@@ -27,3 +28,5 @@ export const Close = GrClose;
 export const DashboardIcon = RxDashboard;
 export const Spinner = ImSpinner2;
 export const Logout = CiLogout;
+export const Off = FaPowerOff; 
+export const Notification = IoIosNotificationsOutline;
