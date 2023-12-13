@@ -1,5 +1,6 @@
 import { FaCommentAlt, FaRegChartBar, FaBusinessTime , FaClinicMedical } from "react-icons/fa";
 import { CiHome } from "react-icons/ci";
+import { User } from "./icons";
 
 export const menuItem=[
     {
@@ -18,6 +19,11 @@ export const menuItem=[
         path:"/apply-doctor",
         name:"Apply Doctor",
         icon:<FaClinicMedical />
+    },
+    {
+        path:"/profile",
+        name:"Profile",
+        icon:<User />
     },
     // {
     //     path:"/comment",

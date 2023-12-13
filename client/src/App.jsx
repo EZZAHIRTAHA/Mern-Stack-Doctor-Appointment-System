@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { Home, Login, Register, MakeAppointment, ApplyDoctor } from './pages'; // Import MakeAppointment and ApplyDoctor components
+import { Home, Login, Register, MakeAppointment, ApplyDoctor, Profile } from './pages'; // Import MakeAppointment and ApplyDoctor components
 import { Toaster } from 'react-hot-toast';
 import { Spinner } from './assets/icons';
 import { useSelector } from 'react-redux';
@@ -29,6 +29,7 @@ const App = () => {
         >
           <Route path='/appointements' element={<MakeAppointment />} />
           <Route path='/apply-doctor' element={<ApplyDoctor />} />
+          <Route path='/profile' element={<Profile />} />
         </Route>
 
         <Route path='/login' element={<PublicRoute><Login/></PublicRoute>} />

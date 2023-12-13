@@ -7,6 +7,7 @@ import axios from 'axios';
 import Navbar from './Navbar';
 import MakeAppointment from './MakeAppointment';
 import ApplyDoctor from './ApplyDoctor';
+import Profile from './Profile';
 
 
 const Home = () => {
@@ -44,7 +45,7 @@ const Home = () => {
     <>
     <Navbar user={user}/>
     <div className="container text-sm ">
-       <div style={{width: isOpen ? "300px" : "50px"}} className="sidebar ">
+       <div style={{width: isOpen ? "300px" : "50px"}} className="sidebar transition ">
            <div className="top_section">
             <Link to={'/'}>
                <img  className={`${!isOpen && 'hidden'} icon`} src={logo}/>
@@ -64,10 +65,12 @@ const Home = () => {
                ))
            }
        </div>
-       <Routes>
+      { <Routes>
           <Route path='/appointements' element={<MakeAppointment />} />
           <Route path='/apply-doctor' element={<ApplyDoctor />} />
+          <Route path='/profile' element={<Profile />} />
         </Routes>
+      }
     </div>
     </>
 );

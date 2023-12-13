@@ -32,8 +32,8 @@ const Navbar = ({user}) => {
   return (
     
 
-<nav className="bg-[#041c29] border-gray-200 ">
-  <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+<nav className="bg-[#041c29] border-gray-200  ">
+  <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4 transition">
     <a href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
         <img src={akdital} className="w-[9rem]  h-full" alt="Flowbite Logo" />
     </a>
@@ -42,8 +42,8 @@ const Navbar = ({user}) => {
         {!navbarOpen ? <MenuBar className='text-2xl'/> : <Close className='text-2xl'/>}
     </button>
               {navbarOpen && (
-            <div className="w-full md:hidden" id="navbar-mobile">
-              <ul className="font-medium flex justify-start items-center gap-4 flex-col p-4 mt-4 bg-gray-800">
+            <div className="w-full md:hidden  transition  " >
+              <ul className="font-medium flex  justify-start items-center gap-4 flex-col p-4 mt-4 bg-gray-800">
                 <li className=''>
                   <button
                     onClick={handleLogout}
@@ -74,7 +74,7 @@ const Navbar = ({user}) => {
           {/* <User className='text-xl'/>   */}
         </li>
         <li>
-          <button onClick={handleLogout} className={logoutButton} aria-current="page">
+          <button onClick={handleLogout} className={`${logoutButton} `}>
             Logout
             <Logout className='text-xl'/>
           </button>
