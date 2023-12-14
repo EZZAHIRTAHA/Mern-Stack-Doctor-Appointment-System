@@ -8,6 +8,7 @@ import Navbar from './Navbar';
 import MakeAppointment from './MakeAppointment';
 import ApplyDoctor from './ApplyDoctor';
 import Profile from './Profile';
+import { adminMenu } from '../assets/adminMenu';
 
 
 const Home = () => {
@@ -22,6 +23,8 @@ const Home = () => {
   const toggle = () => setIsOpen (!isOpen);
 
 
+  const itemsToBeRendered = user.isAdmin ? adminMenu : menuItem;
+
   const getData = async() => {
     try {
       const res = await axios.post(baseUrl, {},  {
@@ -30,11 +33,12 @@ const Home = () => {
         }
       })
       console.log(res.data);
-      setUser(res.data.user.username)
+      setUser(res.data.user)
     } catch (error) {
       console.log(error);
     }
   }
+
 
 
   useEffect(()=> {
@@ -55,7 +59,7 @@ const Home = () => {
                </div>
            </div>
            {
-               menuItem.map((item, index)=>(
+               itemsToBeRendered.map((item, index)=>(
                    <NavLink to={item.path} key={index} className="link  rounded-none w-full" activeclassname="active">
                        <div className="icon flex items-center">{item.icon}</div>
                        <div style={{display: isOpen ? "block" : "none"}} className="link_text">{item.name}</div>

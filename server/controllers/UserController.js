@@ -84,6 +84,8 @@ const getUserInfoById = asyncHandler(async (req, res) => {
           _id: user._id,
           username: user.name,
           email: user.email,
+          isDoctor: user.isDoctor,
+          isAdmin: user.isAdmin,
           // Add any other user information you want to include
         },
       });

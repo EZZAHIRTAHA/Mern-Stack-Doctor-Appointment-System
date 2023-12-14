@@ -4,13 +4,15 @@ import toast from 'react-hot-toast'
 import { Close, Logout, MenuBar, Notification, Off, User } from '../assets/icons'
 import axios from 'axios'
 import { logoutButton } from '../assets/classes'
+import { useSelector } from 'react-redux'
+import { Link, useNavigate } from 'react-router-dom'
 
 
 
 const Navbar = ({user}) => {
 
     const [navbarOpen, setNavbarOpen] = useState(false)
-
+    const navigate = useNavigate()
 
 
     const handleToggle = () => {
@@ -21,7 +23,8 @@ const Navbar = ({user}) => {
     const handleLogout = () => {
         localStorage.removeItem('token')
         toast.success('Logout successful')
-        window.location.href = '/login'
+        // window.location.href = '/login'
+        navigate('/login')
     }
 
     const clearLocalStorage = () => {
@@ -41,8 +44,9 @@ const Navbar = ({user}) => {
         <span className="sr-only">Open main menu</span>
         {!navbarOpen ? <MenuBar className='text-2xl'/> : <Close className='text-2xl'/>}
     </button>
+    {/* Responsive navbar */}
               {navbarOpen && (
-            <div className="w-full md:hidden  transition  " >
+            <div className="w-full md:hidden    " >
               <ul className="font-medium flex  justify-start items-center gap-4 flex-col p-4 mt-4 bg-gray-800">
                 <li className=''>
                   <button
@@ -54,23 +58,23 @@ const Navbar = ({user}) => {
                   </button>
                 </li>
                 <li className='text-white uppercase underline font-light text-md tracking-widest'>
-                    {user}
+                    {user.username}
                 </li>
                 <li className='text-white flex justify-center items-center p-3 bg-logo rounded-full cursor-pointer'>
-                    <Notification className='text-2xl text-white hover:scale-110 duration-300 transition  '/>
+                    <Notification className='text-2xl text-white hover:scale-125 duration-0 transition  '/>
                 </li>
               </ul>
             </div>
-          )}
+            )}
     <div className="hidden w-full md:block md:w-auto" >
       <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
         <li className='text-white flex justify-center items-center p-3 bg-logo rounded-full cursor-pointer'>
-          <Notification className='text-2xl text-white hover:scale-110 duration-300 transition  '/>
+          <Notification className='text-2xl text-white hover:scale-125 duration-0 transition  '/>
         </li>
         <li className='text-white flex justify-center items-center gap-3 '>
-          <span className='text-white uppercase underline font-light'>
-            {user}
-          </span>
+          <Link to={'/profile'} className='text-white uppercase underline hover:no-underline font-light'>
+            {user.username}
+          </Link>
           {/* <User className='text-xl'/>   */}
         </li>
         <li>
