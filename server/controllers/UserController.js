@@ -86,6 +86,8 @@ const getUserInfoById = asyncHandler(async (req, res) => {
           email: user.email,
           isDoctor: user.isDoctor,
           isAdmin: user.isAdmin,
+          unseenNotifications: user.unseenNotifications,
+          seenNotifications: user.seenNotifications,
           // Add any other user information you want to include
         },
       });

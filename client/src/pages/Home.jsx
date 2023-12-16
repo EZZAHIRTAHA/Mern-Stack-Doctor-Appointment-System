@@ -9,6 +9,8 @@ import MakeAppointment from './MakeAppointment';
 import ApplyDoctor from './ApplyDoctor';
 import Profile from './Profile';
 import { adminMenu } from '../assets/adminMenu';
+import Doctors from './Doctors';
+import Users from './Users';
 
 
 const Home = () => {
@@ -69,12 +71,14 @@ const Home = () => {
                ))
            }
        </div>
-      { <Routes>
-          <Route path='/appointements' element={<MakeAppointment />} />
-          <Route path='/apply-doctor' element={<ApplyDoctor />} />
-          <Route path='/profile' element={<Profile />} />
+        <Routes>
+            <Route path='appointments' element={<MakeAppointment />} />
+            <Route path='apply-doctor' element={<ApplyDoctor />} />
+            <Route path='profile' element={<Profile />} />
+            <Route path='doctors' element={<Doctors />} />
+            <Route path='users' element={<Users />} />
         </Routes>
-      }
+      
     </div>
     </>
 );

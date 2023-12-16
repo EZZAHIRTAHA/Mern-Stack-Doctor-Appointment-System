@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { Home, Login, Register, MakeAppointment, ApplyDoctor, Profile } from './pages'; // Import MakeAppointment and ApplyDoctor components
+import { Home, Login, Register, MakeAppointment, ApplyDoctor, Profile, Users, Doctors } from './pages'; // Import MakeAppointment and ApplyDoctor components
 import { Toaster } from 'react-hot-toast';
 import { Spinner } from './assets/icons';
 import { useSelector } from 'react-redux';
@@ -20,21 +20,25 @@ const App = () => {
       <Toaster position="top-center" reverseOrder={false} duration={4000} />
       <Routes>
         <Route
-          path='/'
+          path='*'
           element={
             <ProtectedRoute>
               <Home />
             </ProtectedRoute>
           }
         >
-          <Route path='/appointements' element={<MakeAppointment />} />
-          <Route path='/apply-doctor' element={<ApplyDoctor />} />
-          <Route path='/profile' element={<Profile />} />
+          <Route path='appointments' element={<MakeAppointment />} />
+          <Route path='apply-doctor' element={<ApplyDoctor />} />
+          <Route path='profile' element={<Profile />} />
+          <Route path='users' element={<Users />} />
+          <Route path='doctors' element={<Doctors />} />
+          <Route path='profile' element={<Profile />} />
         </Route>
 
         <Route path='/login' element={<PublicRoute><Login/></PublicRoute>} />
         <Route path='/register' element={<PublicRoute><Register/></PublicRoute>} />
       </Routes>
+
     </>
   );
 };
