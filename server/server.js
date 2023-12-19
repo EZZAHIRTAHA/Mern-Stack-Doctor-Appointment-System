@@ -4,13 +4,15 @@ const PORT = process.env.SERVER_PORT || 5000;
 require("dotenv").config();
 const colors = require('colors');
 const connectDb = require('./db/config');
-const router = require('./routes/UserRoutes');
+const userRouter = require('./routes/UserRoutes');
+const doctorRouter = require('./routes/DoctorRoutes');
 const cors = require('cors');
 
 app.use(cors());
 
 app.use(express.json());
-app.use('/api/user', router);
+app.use('/api/user', userRouter);
+app.use('/api/doctor', doctorRouter);
 
 app.listen(PORT, () => {
     console.log('➜ Local:   '.bold + `http://localhost:${PORT}/`.cyan);
