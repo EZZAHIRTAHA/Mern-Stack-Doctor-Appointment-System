@@ -55,7 +55,7 @@ main{
 .sidebar{
   background: #041c29;
   color: #fff;
-  height: 100vh;
+  /* height: ; */
   width: 400px;
   /* margin: 10px;
   border-radius: 7px; */
@@ -108,4 +108,19 @@ border: none;
 .transition
 {
   transition: all 0.5s;
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+  height: 3px;
+}
+
+::-webkit-scrollbar-track {
+  background: #ffffff3a;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #041c29;
+  border-radius: 20px;
+  height: 3px;
 }

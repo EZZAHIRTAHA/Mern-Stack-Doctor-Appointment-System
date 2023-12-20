@@ -15,6 +15,7 @@ import Users from './Users';
 
 const Home = () => {
 
+  const [pathName, setPathName] = useState(window.location.pathname)
 
   const baseUrl = "http://localhost:5000/api/user/get-user-info-by-id"
 
@@ -50,8 +51,9 @@ const Home = () => {
   return (
     <>
     <Navbar user={user}/>
+    {pathName}
     <div className="container text-sm ">
-       <div style={{width: isOpen ? "300px" : "50px"}} className="sidebar transition ">
+       <div style={{width: isOpen ? "300px" : "50px"}} className="sidebar  transition ">
            <div className="top_section">
             <Link to={'/'}>
                <img  className={`${!isOpen && 'hidden'} icon`} src={logo}/>
