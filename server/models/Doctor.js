@@ -4,11 +4,6 @@ const mongoose = require('mongoose')
 
 const doctorSchema = new mongoose.Schema({
     
-    userId: {
-        type: String,
-        required: true,
-        unique: true,
-    },
     firstname: {
         type: String,
         required: true,
@@ -43,18 +38,10 @@ const doctorSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    consultationHours:{
-        type: Object,
+    timings:{
+        type: Array,
         required: true,
     },
-    fromTime:{
-        type: String,
-        required: true,
-    },
-    toTime:{
-        type: String,
-        required: true,
-    }
 },
 {
     timestamps: true,

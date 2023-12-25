@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { inputClassesDoc, labelClassesDoc } from '../assets/classes'
-
-
-
+import TimePicker from 'react-time-picker';
+import 'react-time-picker/dist/TimePicker.css';
+import 'react-clock/dist/Clock.css';
 
 const ApplyDoctor = () => {
 
@@ -18,7 +18,8 @@ const ApplyDoctor = () => {
     profession: '',
     experience: '',
     address: '',
-    fee: ''
+    fee: '',
+    timings: ''
   })
 
 
@@ -31,6 +32,10 @@ const ApplyDoctor = () => {
     event.preventDefault();
     window.location.reload();
   }
+
+  const handleTimeChange = (time) => {
+    setFormData((prevFormData) => ({ ...prevFormData, timings: time }));
+  };
 
 
   const clearForm = () => {
@@ -47,12 +52,12 @@ const ApplyDoctor = () => {
       fee: ''
     })
   }
+// console.log(formData.timings);
 
-
-  console.log(formData);
+  // console.log(formData);
 
   return (
-    <div className='w-full  '>
+    <div className='w-full  flex flex-col  sm:m-10 m-0'>
       <h1 className='m-2 text-2xl text-center capitalize'>Apply doctor account</h1>
         <form className="mx-3 my-4 border p-5 rounded-sm flex flex-col gap-3 justify-center" onSubmit={handleSubmit}>
           <div className="grid md:grid-cols-2 md:gap-6">
@@ -87,7 +92,7 @@ const ApplyDoctor = () => {
                 <label className={`${labelClassesDoc}`} htmlFor="floating_profession" >Profession (Ex. Google)</label>
             </div>
             <div className="relative z-0 w-full mb-5 group">
-                <input value={formData.experience} onChange={handleChange} type="text" name="experience" id="floating_experience" className={`${inputClassesDoc}`} placeholder=" " required />
+                <input value={formData.experience} onChange={handleChange} type="number" name="experience" id="floating_experience" className={`${inputClassesDoc}`} placeholder=" " required />
                 <label className={`${labelClassesDoc}`} htmlFor="floating_experience" >Experience </label>
             </div>
           <div className="relative z-0 w-full mb-5 group">
@@ -98,13 +103,22 @@ const ApplyDoctor = () => {
                 <input value={formData.fee} onChange={handleChange} type="text" name="fee" id="floating_fee" className={`${inputClassesDoc}`} placeholder=" " required />
                 <label className={`${labelClassesDoc}`} htmlFor="floating_fee" >Fee per visit </label>
             </div>
+            <div>
+          <label className={labelClassesDoc}>Select Timings:</label>
+          <TimePicker
+    className={inputClassesDoc}
+    onChange={handleTimeChange}
+    value={formData.timings}
+    clockClassName="custom-clock-class" // Add a custom class to the clock component
+    clearIconClassName="custom-clear-icon-class" // Add a custom class to the clear icon
+    clearClockClassName="custom-clear-clock-class" // Add a custom class to the clear clock button
+  />
+        </div>
           </div>
-          <button type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
+           
+          <button type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-32 sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
         </form>
-        
-        
 
-        
     </div>
   )
 }
