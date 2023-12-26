@@ -88,6 +88,7 @@ const Register = () => {
     return (
         <section style={bgStyle} className='h-screen w-full flex justify-center items-center'>
           <form
+            autoComplete='off'
             className='bg-white bg-opacity-50 flex justify-center items-center flex-col gap-5 p-10 sm:p-30 rounded-[10px] scale-up-center shadow-2xl w-full md:w-[40%] h-[90%] '
             onSubmit={handleSubmit}
           >

@@ -67,6 +67,7 @@ const Login = () => {
 
         <section style={bgStyle} className='h-screen  w-full flex justify-center items-center'>
           <form
+            autoComplete='off'
             className='bg-white bg-opacity-50 flex scale-up-center justify-center items-center flex-col gap-5 p-10 sm:p-30 rounded-[10px] shadow-2xl w-full md:w-[40%] md:h-[90%] h-full '
             onSubmit={handleSubmit}
           >

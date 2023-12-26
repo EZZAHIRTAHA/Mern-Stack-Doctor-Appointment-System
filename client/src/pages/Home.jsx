@@ -52,7 +52,7 @@ const Home = () => {
     <>
     <Navbar user={user}/>
     {/* {pathName} */}
-    <div className="container text-sm h-[120vw]">
+    <div className="container text-sm sm:h-[120vw] h-[200vw]">
        <div style={{width: isOpen ? "300px" : "50px"}} className="sidebar  transition ">
            <div className="top_section">
             <Link to={'/'}>

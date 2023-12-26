@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { inputClassesDoc, labelClassesDoc } from '../assets/classes'
+import { buttonDoc, inputClassesDoc, labelClassesDoc } from '../assets/classes'
 import TimePicker from 'react-time-picker';
 import 'react-time-picker/dist/TimePicker.css';
 import 'react-clock/dist/Clock.css';
@@ -19,8 +19,26 @@ const ApplyDoctor = () => {
     experience: '',
     address: '',
     fee: '',
-    timings: ''
+    timings: {
+      from: '',
+      to: ''
+    }
   })
+  
+  const [fromTime, setFromTime] = useState('');
+  
+  const [toTime, setToTime] = useState('')
+
+
+  const handleTimeChangeFrom = (time) => {
+    setFromTime(time);
+    setFormData((prevFormData) => ({ ...prevFormData, timings: { ...prevFormData.timings, from: time } }));
+  };
+
+  const  handleTimeChangeTo = (time) => {
+    setToTime(time);
+    setFormData((prevFormData) => ({ ...prevFormData, timings: { ...prevFormData.timings, to: time } }));
+  };
 
 
   const handleChange = (event) => {
@@ -30,14 +48,12 @@ const ApplyDoctor = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    window.location.reload();
+    console.log(formData)
+    clearForm();
+
   }
 
-  const handleTimeChange = (time) => {
-    setFormData((prevFormData) => ({ ...prevFormData, timings: time }));
-  };
-
-
+ 
   const clearForm = () => {
     setFormData({
       firstName: '',
@@ -49,12 +65,15 @@ const ApplyDoctor = () => {
       profession: '',
       experience: '',
       address: '',
-      fee: ''
+      fee: '',
+      timings: {
+        from: '',
+        to: ''
+      }
     })
+    
   }
-// console.log(formData.timings);
 
-  // console.log(formData);
 
   return (
     <div className='w-full  flex flex-col  sm:m-10 m-0'>
@@ -85,11 +104,11 @@ const ApplyDoctor = () => {
             </div>
             <div className="relative z-0 w-full mb-5 group">
                 <input value={formData.departement} onChange={handleChange} type="text" name="departement" id="floating_departement" className={`${inputClassesDoc}`} placeholder=" " required />
-                <label className={`${labelClassesDoc}`} htmlFor="floating_departement" >Departement (Ex. Google)</label>
+                <label className={`${labelClassesDoc}`} htmlFor="floating_departement" >Departement </label>
             </div>
             <div className="relative z-0 w-full mb-5 group">
                 <input value={formData.profession} onChange={handleChange} type="text" name="profession" id="floating_profession" className={`${inputClassesDoc}`} placeholder=" " required />
-                <label className={`${labelClassesDoc}`} htmlFor="floating_profession" >Profession (Ex. Google)</label>
+                <label className={`${labelClassesDoc}`} htmlFor="floating_profession" >Profession (Ex. Doctor)</label>
             </div>
             <div className="relative z-0 w-full mb-5 group">
                 <input value={formData.experience} onChange={handleChange} type="number" name="experience" id="floating_experience" className={`${inputClassesDoc}`} placeholder=" " required />
@@ -104,19 +123,33 @@ const ApplyDoctor = () => {
                 <label className={`${labelClassesDoc}`} htmlFor="floating_fee" >Fee per visit </label>
             </div>
             <div>
-          <label className={labelClassesDoc}>Select Timings:</label>
+          <label className={''}>From:</label>
           <TimePicker
-    className={inputClassesDoc}
-    onChange={handleTimeChange}
-    value={formData.timings}
-    clockClassName="custom-clock-class" // Add a custom class to the clock component
-    clearIconClassName="custom-clear-icon-class" // Add a custom class to the clear icon
-    clearClockClassName="custom-clear-clock-class" // Add a custom class to the clear clock button
-  />
+              className={inputClassesDoc}
+              onChange={handleTimeChangeFrom}
+              value={formData.timings.from}
+              clockClassName="custom-clock-class" // Add a custom class to the clock component
+              clearIconClassName="custom-clear-icon-class" // Add a custom class to the clear icon
+              clearClockClassName="custom-clear-clock-class" // Add a custom class to the clear clock button
+            />
+        </div>
+        <div>
+          <label className={''}>To: </label>
+          <TimePicker
+              className={inputClassesDoc}
+              onChange={handleTimeChangeTo}
+              value={formData.timings.to}
+              clockClassName="custom-clock-class" // Add a custom class to the clock component
+              clearIconClassName="custom-clear-icon-class" // Add a custom class to the clear icon
+              clearClockClassName="custom-clear-clock-class" // Add a custom class to the clear clock button
+            />
         </div>
           </div>
            
-          <button type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-32 sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
+          <button type="submit" className={buttonDoc}>Submit</button>
+          <div className="">
+
+          </div>
         </form>
 
     </div>

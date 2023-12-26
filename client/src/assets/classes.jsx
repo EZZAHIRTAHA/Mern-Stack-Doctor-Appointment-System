@@ -12,8 +12,13 @@ export const loginButton = "text-white w-full bg-blue-700 hover:bg-blue-800 outl
 
 export const logoutButton = 'flex justify-center items-center gap-3 p-2 text-white bg-blue-700 rounded md:bg-transparent  text-md hover:bg-white hover:text-logo font-light border tranistion duration-300  border-white'
 
+
+export const buttonDoc = "text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-32 sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+
 export const bgStyle = {
     background: "url('https://img.freepik.com/free-vector/white-background-with-blue-tech-hexagon_1017-19366.jpg?w=740&t=st=1700151268~exp=1700151868~hmac=6531a9849bf76e189067cc823064707e0ddb7dd99a9311e8b442664158130491')",
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
 };
+
+
