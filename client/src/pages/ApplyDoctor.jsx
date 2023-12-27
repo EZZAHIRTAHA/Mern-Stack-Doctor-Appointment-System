@@ -58,7 +58,7 @@ const ApplyDoctor = () => {
     setFormData({
       firstName: '',
       lastName: '',
-      email: '',
+      website: '',
       image: '',
       phone: '',
       departement: '',
@@ -89,17 +89,17 @@ const ApplyDoctor = () => {
                 <label className={`${labelClassesDoc}`} htmlFor="floating_last_name" >Last name</label>
             </div>
           <div className="relative z-0 w-full mb-5 group ">
-              <input value={formData.email} onChange={handleChange} type="email" name="email" id="floating_email" className={`${inputClassesDoc}`} placeholder=" " required />
-              <label className={`${labelClassesDoc}`} htmlFor="floating_email" >Email address</label>
+              <input value={formData.website} onChange={handleChange} type="text" name="website" id="floating_website" className={`${inputClassesDoc}`} placeholder=" " required />
+              <label className={`${labelClassesDoc}`} htmlFor="floating_website" >Website </label>
           </div>
-          <div className="relative z-0 w-full mb-5 group">
+          {/* <div className="relative z-0 w-full mb-5 group">
               <input value={formData.image} onChange={handleChange} type="text" name="image" id="floating_image" className={`${inputClassesDoc}`} placeholder=" " required />
               <label className={`${labelClassesDoc}`} htmlFor="floating_image" >Image</label>
-          </div>
+          </div> */}
           </div>
           <div className="grid md:grid-cols-2 md:gap-6">
             <div className="relative z-0 w-full mb-5 group">
-                <input value={formData.phone} onChange={handleChange} type="tel"  name="phone" id="floating_phone" className={`${inputClassesDoc}`} placeholder=" " required />
+                <input value={formData.phone} onChange={handleChange} type="tel"  name="phone" id="floating_phone" className={`${inputClassesDoc}`}  required />
                 <label className={`${labelClassesDoc}`} htmlFor="floating_phone" >Phone number (123-456-7890)</label>
             </div>
             <div className="relative z-0 w-full mb-5 group">

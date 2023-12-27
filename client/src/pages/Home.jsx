@@ -43,6 +43,20 @@ const Home = () => {
   }
 
 
+  // const reloadPage = () => {
+  //   window.location.reload();
+  // }
+
+  // const getPagePath = () => {
+  //   window.location.pathname
+  // }
+
+  // const handlePathChange = (pathName) => {
+  //   setPathName(getPathName)
+  //   console.log(pathName)
+  // }
+
+
 
   useEffect(()=> {
     getData()

@@ -47,7 +47,7 @@ const Navbar = ({user}) => {
     {/* Responsive navbar */}
               {navbarOpen && (
             <div className="w-full md:hidden    " >
-              <ul className="font-medium flex  justify-start items-center gap-4 flex-col p-4 mt-4 bg-gray-800">
+              <ul className="font-medium flex  justify-start  items-center gap-4 flex-col p-4 mt-4 bg-gray-800">
                 <li className=''>
                   <button
                     onClick={handleLogout}
@@ -57,7 +57,7 @@ const Navbar = ({user}) => {
                     Logout <Logout className='text-2xl '/>
                   </button>
                 </li>
-                <li className='text-white uppercase underline font-light text-md tracking-widest'>
+                <li className='text-white uppercase underline font-light text-md tracking-widest bg-gray-700 '>
                     {user.username}
                 </li>
                 <li className='text-white flex justify-center items-center p-3 bg-logo rounded-full cursor-pointer'>
