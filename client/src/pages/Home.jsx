@@ -88,7 +88,7 @@ const Home = () => {
            }
        </div>
         <Routes>
-            <Route path='appointments' element={<MakeAppointment />} />
+            <Route path='appointements' element={<MakeAppointment />} />
             <Route path='apply-doctor' element={<ApplyDoctor />} />
             <Route path='profile' element={<Profile />} />
             <Route path='doctors' element={<Doctors />} />
