@@ -4,7 +4,7 @@ const MakeAppointment = () => {
   
 
   const tabs = ['id', 'doctor', 'phone', 'Date & Time', 'status'];
-  
+
   return (
           
 
@@ -14,8 +14,8 @@ const MakeAppointment = () => {
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
           <tr>
                 {
-                tabs.map(tab => (
-                      <th scope="col" class="px-6 py-3">
+                tabs.map((tab, index) => (
+                      <th key={index} scope="col" class="px-6 py-3">
                         {tab}
                       </th>
                 ))}

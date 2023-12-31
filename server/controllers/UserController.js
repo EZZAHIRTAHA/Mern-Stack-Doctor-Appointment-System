@@ -3,7 +3,7 @@ const asyncHandler = require('express-async-handler');
 const bcrypt = require('bcryptjs')
 const colors = require('colors');
 const jwt = require('jsonwebtoken');
-
+const Doctor = require('../models/Doctor');
  
 const registerUser = asyncHandler(async (req, res) => {
     try {
@@ -97,6 +97,33 @@ const getUserInfoById = asyncHandler(async (req, res) => {
   }
 })
 
+
+const applyDoctorAccount = asyncHandler( async(req, res) => {
+  try 
+  {
+    const newDoctor = new Doctor({...req.body, status: 'pending'});
+    await newDoctor.save();
+    const adminUser = await User.findOne({ isAdmin: 'true' })
+    const unseenNotifications = adminUser.unseenNotifications;
+    unseenNotifications.push({
+      type: `new-doctor-account-request`,
+      message: `New Doctor Account Request from ${req.body.name}`,
+      data: {
+        doctorId: newDoctor._id,
+        doctorName: newDoctor.name,
+      },
+      onclickPath: `/admin/doctors`,
+    })
+    await User.updateOne({ isAdmin: 'true' }, { unseenNotifications });
+  } 
+  catch (error) 
+  {
+    res.status(500).json({ 
+      message: 'Error applying for doctor account', 
+      success: false, 
+      error });
+  }
+})
  
 
 
@@ -129,5 +156,6 @@ module.exports = {
     logoutUser,
     getData,
     createUser,
-    getUserInfoById
+    getUserInfoById,
+    applyDoctorAccount
 };
