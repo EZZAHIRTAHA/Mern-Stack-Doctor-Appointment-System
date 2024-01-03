@@ -115,6 +115,10 @@ const applyDoctorAccount = asyncHandler( async(req, res) => {
       onclickPath: `/admin/doctors`,
     })
     await User.updateOne({ isAdmin: 'true' }, { unseenNotifications });
+    res.status(200).json({
+      message: 'Doctor Account Requested Successfully',
+      success: true,
+    })
   } 
   catch (error) 
   {
