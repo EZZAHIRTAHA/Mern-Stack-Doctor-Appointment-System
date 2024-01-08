@@ -3,6 +3,7 @@ import { buttonDoc, inputClassesDoc, labelClassesDoc } from '../assets/classes'
 import TimePicker from 'react-time-picker';
 import 'react-time-picker/dist/TimePicker.css';
 import 'react-clock/dist/Clock.css';
+import axios from 'axios';
 
 const ApplyDoctor = () => {
 
@@ -12,8 +13,9 @@ const ApplyDoctor = () => {
     firstName: '',
     lastName: '',
     email: '',
-    image: '',
+    // image: '',
     phone: '',
+    website: '',
     departement: '',
     profession: '',
     experience: '',
@@ -24,6 +26,8 @@ const ApplyDoctor = () => {
       to: ''
     }
   })
+
+  const baseUrl = 'http://localhost:5000/api/user/apply-doctor-account'
   
   const [fromTime, setFromTime] = useState('');
   
@@ -46,20 +50,52 @@ const ApplyDoctor = () => {
     setFormData(formData => ({...formData, [name]: value}))
   }
 
-  const handleSubmit = (event) => {
+
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(formData)
-    clearForm();
 
-  }
-
+    try {
+       const { firstName, lastName, website, image, phone, departement, profession, experience, address, fee, timings } = formData;
+       const token = localStorage.getItem('token');
+       const response = await axios.post(baseUrl, {
+          firstName,
+          lastName,
+          website,
+          // image,
+          phone,
+          departement,
+          profession,
+          experience,
+          address,
+          fee,
+          timings,
+          userId: localStorage.getItem('userId'),
+       }, {
+          headers: {
+             'Authorization': `Bearer ${token}`,
+             'Content-Type': 'application/json',
+          },
+       });
+ 
+       console.log(response);
+ 
+       // Clear the form after successful submission
+       clearForm();
+    } catch (error) {
+       console.error('Error submitting doctor application:', error);
+       // Handle the error, display a message to the user, etc.
+    }
+ };
+ 
+ 
  
   const clearForm = () => {
     setFormData({
       firstName: '',
       lastName: '',
       website: '',
-      image: '',
+      // image: '',
       phone: '',
       departement: '',
       profession: '',
@@ -73,6 +109,7 @@ const ApplyDoctor = () => {
     })
     
   }
+
 
 
   return (
@@ -89,8 +126,8 @@ const ApplyDoctor = () => {
                 <label className={`${labelClassesDoc}`} htmlFor="floating_last_name" >Last name</label>
             </div>
           <div className="relative z-0 w-full mb-5 group ">
-              <input value={formData.website} onChange={handleChange} type="text" name="website" id="floating_website" className={`${inputClassesDoc}`} placeholder=" " required />
-              <label className={`${labelClassesDoc}`} htmlFor="floating_website" >Website </label>
+              <input value={formData.website} onChange={handleChange} type="text" name="website" id="floating_website" className={`${inputClassesDoc} `} placeholder=" " required />
+              <label className={`${labelClassesDoc} `} htmlFor="floating_website" >Website </label>
           </div>
         
           </div>
