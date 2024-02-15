@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { Home, Login, Register, MakeAppointment, ApplyDoctor, Profile, Users, Doctors, Draft } from './pages'; // Import MakeAppointment and ApplyDoctor components
+import { Home, Login, Register, MakeAppointment, ApplyDoctor, Profile, Users, Doctors, Draft, ForgotPassword } from './pages';
 import { Toaster } from 'react-hot-toast';
 import { Spinner } from './assets/icons';
 import { useSelector } from 'react-redux';
@@ -41,6 +41,7 @@ const App = () => {
 
         <Route path='/login' element={<PublicRoute><Login/></PublicRoute>} />
         <Route path='/register' element={<PublicRoute><Register/></PublicRoute>} />
+        <Route path='/forgot-password' element={<PublicRoute><ForgotPassword/></PublicRoute>} />
       </Routes>
 
     </>

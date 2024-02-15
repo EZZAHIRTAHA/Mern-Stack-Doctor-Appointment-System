@@ -18,7 +18,8 @@ export const buttonDoc = "text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 
 export const bgStyle = {
     background: "url('https://img.freepik.com/free-vector/white-background-with-blue-tech-hexagon_1017-19366.jpg?w=740&t=st=1700151268~exp=1700151868~hmac=6531a9849bf76e189067cc823064707e0ddb7dd99a9311e8b442664158130491')",
     backgroundSize: 'cover',
-    backgroundRepeat: 'no-repeat',
+    backgroundRepeat: "no-repeat",
+    backgroundPosition: 'center',
 };
 
 

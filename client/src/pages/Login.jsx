@@ -108,6 +108,11 @@ const Login = () => {
                   Password
                 </label>
               </div>
+              <div className="flex items-end justify-end w-full ">
+                <Link to={`/forgot-password`} className='text-[10px] text-end text-gray-400 underline'>
+                  Forgot password ?
+                </Link>
+              </div>
             <button type="submit" className={`${loginButton}`}>
               Login
             </button>
